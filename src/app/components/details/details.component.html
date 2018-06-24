@@ -1,0 +1,19 @@
+<div *ngIf="referral" class="card" style="width: 100%;">
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-8">
+        <h2 class="card-title">{{ referral.name }} {{ referral.lastName }}</h2>
+      </div>
+      <div class="col">
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <button routerLink="/edit/{{ referral.id }}" type="button" class="btn btn-secondary">Edit</button>
+              <button routerLink="/delete/{{ referral.id }}" type="button" class="btn btn-danger">Delete</button>
+              
+            </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" placeholder="First Name" name="name" id="name" #refName="ngModel" class="form-control" [(ngModel)]="customer.name" required>
+    </div>
+    <div class="form-group">
+      <label for="lname">Last Name</label>
+      <input type="text" placeholder="Last Name" name="lname" id="lname" #refLastName="ngModel" class="form-control" [(ngModel)]="customer.lastName" required>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group col-md-4 col-xs-4">
+        <label for="address">Address</label>
+        <input type="text" placeholder="Address" name="address" id="address" #refAddress="ngModel" class="form-control" [(ngModel)]="customer.address.street" required>
+      </div>
+      <div class="form-group col">
+        <label for="apt">Apartment</label>
+        <input type="text" name="apt" placeholder="Apt/Suite/Unit" id="apt" #refAddressApt="ngModel" class="form-control" [(ngModel)]="customer.address.apt">
+      </div>
+      <div class="form-group col-md-3 col-xs-3">
+          <label for="city">City</label>
+          <input type="text" placeholder="City" name="city" id="city" #refAddressCity="ngModel" class="form-control" [(ngModel)]="customer.address.city" required>
+        </div>
+        <div class="form-group col-md-3 col-xs-3">
+          <label for="zipcode">Zip Code</label>
+          <input type="text" placeholder="Zip Code" name="apt" id="zipcode" #refAddressZipcode="ngModel" class="form-control" [(ngModel)]="customer.address.zipcode" required>
+        
+        </div>
+        </div>
+       
+        <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="phone">Phone</label>
+            <input type="text" placeholder="Phone" name="phone" id="phone" 
+            
+            class="form-control"
+            #refPhone="ngModel" 
+            [(ngModel)]="customer.phone" required minlength="10">
+          </div>
+          <div class="form-group col">
+            <label for="email">Email</label>
+            <input type="text" name="email" placeholder="Email" id="email" #refEmail="ngModel" class="form-control" [(ngModel)]="customer.email">
+          </div>
+          <div class="form-group col">
+              <label for="move">Move In</label>
+              <input type="date" name="move" id="move" #refMove="ngModel" class="form-control" [(ngModel)]="customer.moveIn" required>
+            </div>
+            <div class="form-group col">
+                <label for="status">Status</label>
+                <select class="form-control" name="status" id="status" #refStatus="ngModel" [(ngModel)]="customer.status" required>
+                  <option value="new">New</option>
+                  <option value="in progress">In progress</option>
+                  <option value="pending">Pending</option>
+                  <option value="closed">Closed</option>
+                </select>
+              </div>
+        </div>
+    
+    <div class="form-group">
+      <label for="note"></label>
+      <textarea class="form-control" name="note" id="" cols="30" rows="3" #refNote="ngModel" [(ngModel)]="customer.note" ></textarea>
+    </div>
+    <button [disabled]="!myForm.form.valid" class="btn btn-success btn-block">Update Referral</button>
+  </form>
+  <div>
+    <p>{{ customer | json }}</p>
+  </div>

@@ -1,0 +1,29 @@
+<div *ngIf="referralList" class="">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Move In</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let referral of referralList">
+            <td>{{ referral.name }} {{ referral.lastName }}</td>
+            <td>{{ referral.address.street }}</td>
+            <td>{{ referral.phone }}</td>
+            <td>{{ referral.moveIn | date:"shortDate" }}</td>
+            <td class="bg-success">{{ referral.status | uppercase }}</td>
+            <td><span><i class="fa fa-check-circle"></i></span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          
+          
+        </tfoot>
+      </table>
+</div>
