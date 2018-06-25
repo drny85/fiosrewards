@@ -1,4 +1,4 @@
-<div *ngIf="referralList" class="table-responsive-sm">
+<div *ngIf="referralList" class="">
     <table class="table">
         <thead>
           <tr>
@@ -17,8 +17,8 @@
             <td>{{ referral.address.street }}</td>
             <td>{{ referral.phone }}</td>
             <td>{{ referral.moveIn | date:"shortDate" }}</td>
-            <td class="bg-success">{{ referral.status | uppercase }}</td>
-            <td><span><i class="fa fa-check-circle"></i></span></td>
+            <td class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
+            <td><span><i class="fa fa-hourglass-start fa-2x"></i></span></td>
           </tr>
         </tbody>
         <tfoot>

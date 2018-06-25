@@ -1,3 +1,4 @@
+import { PendingComponent } from './components/pending/pending.component';
 import { ClosedReferralsComponent } from './components/closed-referrals/closed-referrals.component';
 import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
@@ -8,6 +9,9 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AllReferralsComponent } from './components/all-referrals/all-referrals.component';
+import { NotsoldComponent } from './components/notsold/notsold.component';
+import { NewComponent } from './components/new/new.component';
+import { InprogressComponent } from './components/inprogress/inprogress.component';
 
 
 const appRoutes: Routes = [
@@ -20,7 +24,11 @@ const appRoutes: Routes = [
   { path: 'all-referrals/details/:id', component: DetailsComponent },
   { path: 'closed-referrals', component: ClosedReferralsComponent },
   { path: 'delete/:id', component: DeleteComponent },
+  { path: 'pending', component: PendingComponent },
   { path: 'edit/:id', component: EditComponent },
+  { path: 'notsold', component: NotsoldComponent },
+  { path: 'new', component: NewComponent },
+  { path: 'inprogress', component: InprogressComponent },
 
   { path: '**', component: PagenotfoundComponent }
 ];

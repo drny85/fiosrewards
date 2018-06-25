@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Referral } from '../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,13 +17,24 @@ export class DetailsComponent implements OnInit {
 
   id: string;
   referral: Referral;
+  url: string;
 
-  constructor(private route: ActivatedRoute, private refServ: ReferralsService) { }
+  constructor(private route: ActivatedRoute, private refServ: ReferralsService, private router: Router, private toast: ToastrService) { }
 
   ngOnInit() {
+    this.url = this.router.url;
     this.id = this.route.snapshot.params['id'];
     console.log(this.id);
     this.refServ.getReferral(this.id).subscribe(referral => this.referral = referral);
+
+  }
+
+  onDelete() {
+    if (confirm('Are you sure you want to delete it?')) {
+      this.refServ.deleteReferral(this.id);
+    }
+    this.router.navigate(['all-referrals']);
+    this.toast.info('Referral has been deleted', 'Deteled');
 
   }
 

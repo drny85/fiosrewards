@@ -1,13 +1,23 @@
+<div class="mb-5"> 
+    <button class="btn btn-primary pull-right" routerLink="/all-referrals">Go Back To Referrals</button>
+  </div>
+  <br>
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
   <div class="form-group">
     <label for="name">Name</label>
-    <input type="text" placeholder="First Name" name="name" id="name" #refName="ngModel" class="form-control" [(ngModel)]="customer.name" required>
+    <input [ngClass]="{'is-invalid': refName.errors && refName.touched}" type="text" placeholder="First Name" name="name" id="name" #refName="ngModel" class="form-control" [(ngModel)]="customer.name" required>
+    <div [hidden]="!refName.errors?.required" class="invalid-feeback">
+        Name is required..
+    </div> 
+  
   </div>
   <div class="form-group">
     <label for="lname">Last Name</label>
-    <input type="text" placeholder="Last Name" name="lname" id="lname" #refLastName="ngModel" class="form-control" [(ngModel)]="customer.lastName" required>
+    <input [ngClass]="{'is-invalid': refLastName.errors && refLastName.touched}" type="text" placeholder="Last Name" name="lname" id="lname" #refLastName="ngModel" class="form-control" [(ngModel)]="customer.lastName" required>
+    <div [hidden]="!refLastName.errors?.required" class="invalid-feeback">
+        Last Name is required..
+      </div> 
   </div>
-  
   <div class="form-row">
     <div class="form-group col-md-4 col-xs-4">
       <label for="address">Address</label>
@@ -52,6 +62,7 @@
                 <option value="in progress">In progress</option>
                 <option value="pending">Pending</option>
                 <option value="closed">Closed</option>
+                <option value="not sold">Not Sold</option>
               </select>
             </div>
       </div>
@@ -63,5 +74,5 @@
   <button [disabled]="!myForm.form.valid" class="btn btn-primary btn-block">Add Referral</button>
 </form>
 <div>
-  <p>{{ customer | json }}</p>
+  
 </div>

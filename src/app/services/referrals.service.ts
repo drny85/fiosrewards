@@ -38,8 +38,8 @@ export class ReferralsService {
     this.referralCollection.add(referral);
   }
 
-  deleteReferral(referral: Referral) {
-    this.referralDoc = this.afs.doc(`customer/${referral.id}`);
+  deleteReferral(id: string) {
+    this.referralDoc = this.afs.doc(`customer/${id}`);
     this.referralDoc.delete();
   }
 
