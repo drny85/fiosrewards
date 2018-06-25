@@ -1,6 +1,5 @@
 import { PendingComponent } from './components/pending/pending.component';
 import { ClosedReferralsComponent } from './components/closed-referrals/closed-referrals.component';
-import { DeleteComponent } from './components/delete/delete.component';
 import { EditComponent } from './components/edit/edit.component';
 import { DetailsComponent } from './components/details/details.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
@@ -23,7 +22,6 @@ const appRoutes: Routes = [
   },
   { path: 'all-referrals/details/:id', component: DetailsComponent },
   { path: 'closed-referrals', component: ClosedReferralsComponent },
-  { path: 'delete/:id', component: DeleteComponent },
   { path: 'pending', component: PendingComponent },
   { path: 'edit/:id', component: EditComponent },
   { path: 'notsold', component: NotsoldComponent },
