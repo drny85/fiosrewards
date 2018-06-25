@@ -19,7 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { EditComponent } from './components/edit/edit.component';
-import { DeleteComponent } from './components/delete/delete.component';
 import { ClosedReferralsComponent } from './components/closed-referrals/closed-referrals.component';
 import { PendingComponent } from './components/pending/pending.component';
 import { NotsoldComponent } from './components/notsold/notsold.component';
@@ -38,7 +37,6 @@ import { InprogressComponent } from './components/inprogress/inprogress.componen
     PagenotfoundComponent,
     DetailsComponent,
     EditComponent,
-    DeleteComponent,
     ClosedReferralsComponent,
     PendingComponent,
     NotsoldComponent,
