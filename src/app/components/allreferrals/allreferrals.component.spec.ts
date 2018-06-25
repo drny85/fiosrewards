@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllReferralsComponent } from './all-referrals.component';
+import { AllReferralsComponent } from './allreferrals.component';
 
 describe('AllReferralsComponent', () => {
   let component: AllReferralsComponent;

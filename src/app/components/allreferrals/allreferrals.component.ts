@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'app-all-referrals',
-  templateUrl: './all-referrals.component.html',
-  styleUrls: ['./all-referrals.component.css']
+  selector: 'app-allreferrals',
+  templateUrl: './allreferrals.component.html',
+  styleUrls: ['./allreferrals.component.css']
 })
 export class AllReferralsComponent implements OnInit {
 

@@ -1,3 +1,4 @@
+import { LoginComponent } from './components/login/login.component';
 import { PendingComponent } from './components/pending/pending.component';
 import { ClosedReferralsComponent } from './components/closed-referrals/closed-referrals.component';
 import { EditComponent } from './components/edit/edit.component';
@@ -7,7 +8,7 @@ import { AddReferralComponent } from './components/add-referral/add-referral.com
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllReferralsComponent } from './components/all-referrals/all-referrals.component';
+import { AllReferralsComponent } from './components/allreferrals/allreferrals.component';
 import { NotsoldComponent } from './components/notsold/notsold.component';
 import { NewComponent } from './components/new/new.component';
 import { InprogressComponent } from './components/inprogress/inprogress.component';
@@ -17,15 +18,16 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'add-referral',      component: AddReferralComponent },
   {
-    path: 'all-referrals',
+    path: 'allreferrals',
     component: AllReferralsComponent
   },
-  { path: 'all-referrals/details/:id', component: DetailsComponent },
+  { path: 'allreferrals/details/:id', component: DetailsComponent },
   { path: 'closed-referrals', component: ClosedReferralsComponent },
   { path: 'pending', component: PendingComponent },
   { path: 'edit/:id', component: EditComponent },
   { path: 'notsold', component: NotsoldComponent },
   { path: 'new', component: NewComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'inprogress', component: InprogressComponent },
 
   { path: '**', component: PagenotfoundComponent }
