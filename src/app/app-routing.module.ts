@@ -1,3 +1,4 @@
+import { AllComponent } from './components/all/all.component';
 import { LoginComponent } from './components/login/login.component';
 import { PendingComponent } from './components/pending/pending.component';
 import { ClosedReferralsComponent } from './components/closed-referrals/closed-referrals.component';
@@ -21,13 +22,14 @@ const appRoutes: Routes = [
     path: 'allreferrals',
     component: AllReferralsComponent
   },
-  { path: 'allreferrals/details/:id', component: DetailsComponent },
+  { path: 'all/details/:id', component: DetailsComponent },
   { path: 'closed-referrals', component: ClosedReferralsComponent },
   { path: 'pending', component: PendingComponent },
   { path: 'edit/:id', component: EditComponent },
   { path: 'notsold', component: NotsoldComponent },
   { path: 'new', component: NewComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'all', component: AllComponent },
   { path: 'inprogress', component: InprogressComponent },
 
   { path: '**', component: PagenotfoundComponent }

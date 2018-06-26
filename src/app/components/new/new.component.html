@@ -17,8 +17,9 @@
             <td>{{ referral.address.street }}</td>
             <td>{{ referral.phone }}</td>
             <td>{{ referral.moveIn | date:"shortDate" }}</td>
-            <td class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
-            <td><span><i class="fa fa-hourglass-start fa-2x"></i></span></td>
+            <td [ngClass]="{'bg-info': referral.status == 'new'}" class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
+            
+            <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
           </tr>
         </tbody>
         <tfoot>

@@ -6,11 +6,11 @@ import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 
 @Component({
-  selector: 'app-new',
-  templateUrl: './new.component.html',
-  styleUrls: ['./new.component.css']
+  selector: 'app-all',
+  templateUrl: './all.component.html',
+  styleUrls: ['./all.component.css']
 })
-export class NewComponent implements OnInit {
+export class AllComponent implements OnInit {
 
   referralsCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
@@ -22,7 +22,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {
 
     this.referralsCollection = this.afs.collection('customer', ref => {
-      return ref.where('status', '==', 'new').orderBy('moveIn');
+      return ref.orderBy('moveIn');
 
     });
     this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
@@ -35,3 +35,5 @@ export class NewComponent implements OnInit {
 
   }
 }
+
+

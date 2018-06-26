@@ -1,4 +1,4 @@
-<div *ngIf="referralList" class="table-responsive-sm">
+<div *ngIf="referralList; else noItems" class="table-responsive-sm">
     <table class="table">
         <thead>
           <tr>
@@ -27,3 +27,11 @@
         </tfoot>
       </table>
 </div>
+<ng-template #noItems>
+  <div class="card">
+    <div class="card-body">
+      <p class="alert alert-info">There no referrals in this category.</p>
+    </div>
+
+  </div>
+</ng-template>

@@ -7,8 +7,8 @@
       </div>
       <div class="col">
           <div class="btn-group" role="group" aria-label="Basic example">
-              <button routerLink="/edit/{{ referral.id }}" type="button" class="btn btn-secondary">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="onDelete()">Delete</button>
+              <button routerLink="/edit/{{ referral.id }}" type="button" class="btn btn-secondary fa fa-pencil"> Edit</button>
+              <button type="button" class="btn btn-danger fa fa-trash" (click)="onDelete()"> Delete</button>
               
             </div>
       </div>
@@ -32,7 +32,7 @@
         <div class="card">
           <h4 class="text-center card-header">Notes or Comments</h4>
           <div class="card-body">
-            <blockquote class="text-nowrap font-italic">{{ referral.note }}</blockquote>
+            <blockquote class="font-italic">{{ referral.note }}</blockquote>
           </div>
         </div>
     </div>

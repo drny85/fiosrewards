@@ -52,7 +52,7 @@ export class AddReferralComponent implements OnInit {
     } else {
       // add referral
       this.refServ.addReferral(this.customer);
-      this.route.navigate(['all-referrals']);
+      this.route.navigate(['allreferrals']);
       this.toast.success('Referral Added...', 'Added!' );
 
     }

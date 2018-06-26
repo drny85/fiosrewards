@@ -28,6 +28,7 @@ import { NotsoldComponent } from './components/notsold/notsold.component';
 import { NewComponent } from './components/new/new.component';
 import { InprogressComponent } from './components/inprogress/inprogress.component';
 import { LoginComponent } from './components/login/login.component';
+import { AllComponent } from './components/all/all.component';
 
 
 
@@ -46,7 +47,8 @@ import { LoginComponent } from './components/login/login.component';
     NotsoldComponent,
     NewComponent,
     InprogressComponent,
-    LoginComponent
+    LoginComponent,
+    AllComponent
 
   ],
   imports: [

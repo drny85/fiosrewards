@@ -16,6 +16,7 @@ export class InprogressComponent implements OnInit {
   referralsCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   referralList;
+  n: string;
 
 
   constructor(private afs: AngularFirestore) { }
@@ -29,6 +30,7 @@ export class InprogressComponent implements OnInit {
     this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
       a => {const data = a.payload.doc.data();
           data.id = a.payload.doc.id;
+          data.name = this.n;
           return data;
         }
     ))).subscribe(referral => this.referralList = referral);
