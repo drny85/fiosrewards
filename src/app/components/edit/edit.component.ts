@@ -37,7 +37,7 @@ export class EditComponent implements OnInit {
     } else {
       // add referral
       this.refServ.updateItem(this.customer);
-      this.router.navigate(['allreferrals']);
+      this.router.navigate(['all']);
       this.toast.success('Referral updated...', 'Updated!' );
 
     }

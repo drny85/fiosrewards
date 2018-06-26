@@ -10,6 +10,8 @@ export interface Referral {
     };
     phone: string;
     email?: string;
+    mon?: string;
+    orderDate: string;
     moveIn: string;
     status: string;
     note: string;

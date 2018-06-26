@@ -27,7 +27,9 @@ export class AddReferralComponent implements OnInit {
     },
     phone: '',
     email: '',
+    mon: '',
     moveIn: '',
+    orderDate: '',
     status: '',
     note: ''
 

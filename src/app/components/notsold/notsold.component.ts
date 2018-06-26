@@ -15,6 +15,7 @@ export class NotsoldComponent implements OnInit {
   referralsCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   referralList;
+  show = false;
 
 
   constructor(private afs: AngularFirestore) { }
@@ -28,6 +29,9 @@ export class NotsoldComponent implements OnInit {
     this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
       a => {const data = a.payload.doc.data();
           data.id = a.payload.doc.id;
+          if ( data.name !== '' || data.name != null) {
+            this.show = true;
+        }
           return data;
         }
     ))).subscribe(referral => this.referralList = referral);
