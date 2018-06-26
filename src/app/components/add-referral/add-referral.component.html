@@ -3,7 +3,7 @@
 </div>
 <br>
 <br>
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+<form class="animated fadeInDown" #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
   <div class="form-row">
     <div class="form-group col">
       <label for="name">Name</label>
@@ -22,11 +22,11 @@
         Last Name is required..
       </div>
     </div>
-    <div [hidden]="customer.status != closed" class="form-group col">
+    <div [hidden]="customer.status != 'closed'" class="form-group col">
       <label for="mon">MON</label>
       <input type="text" name="mon" placeholder="Order Number" id="mon" #refMon="ngModel" class="form-control" [(ngModel)]="customer.mon">
     </div>
-    <div [hidden]="customer.status != closed" class="form-group col">
+    <div [hidden]="customer.status != 'closed'" class="form-group col">
         <label for="orderDate">Order Date</label>
         <input type="date" name="orderDate" id="orderDate" #refMove="ngModel" class="form-control" [(ngModel)]="customer.orderDate" required>
       </div>
