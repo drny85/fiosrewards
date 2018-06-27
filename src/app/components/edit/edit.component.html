@@ -1,4 +1,4 @@
-<div class="mb-5">
+<div *ngIf="show" class="mb-5">
     <button class="btn btn-primary pull-right" routerLink="/all">Go Back To Referrals</button>
   </div>
   <br>
@@ -28,7 +28,7 @@
       </div>
       <div [hidden]="customer.status != 'closed'" class="form-group col">
           <label for="orderDate">Order Date</label>
-          <input type="date" name="orderDate" id="orderDate" #refOrder="ngModel" class="form-control" [(ngModel)]="customer.orderDate" required>
+          <input type="date" name="orderDate" id="orderDate" #refOrder="ngModel" class="form-control" [(ngModel)]="customer.orderDate">
         </div>
     </div>
     

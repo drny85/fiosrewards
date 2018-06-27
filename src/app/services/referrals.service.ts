@@ -52,18 +52,16 @@ export class ReferralsService {
     this.referralDoc = this.afs.doc<Referral>(`customer/${id}`);
     this.referral = this.referralDoc.snapshotChanges().pipe(map(action => {
       if (action.payload.exists === false) {
-        console.log('info');
+
         return null;
 
       } else {
         const data = action.payload.data() as Referral;
         data.id = action.payload.id;
-        console.log(data);
         return data;
       }
     })
   );
-    console.log(this.referral);
     return this.referral;
   }
 

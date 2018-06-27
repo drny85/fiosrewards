@@ -8,7 +8,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddReferralComponent } from './components/add-referral/add-referral.component';
@@ -60,6 +59,8 @@ import { AllComponent } from './components/all/all.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     AngularFireAuthModule
+
+
   ],
 
   providers: [ ReferralsService, AuthService ],

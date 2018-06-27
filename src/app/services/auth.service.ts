@@ -2,12 +2,14 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { OuterSubscriber } from 'rxjs/internal/OuterSubscriber';
 
 
 @Injectable()
 export class AuthService {
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth, private msg: ToastrService) { }
 
   login(email: string, password: string) {
     return new Promise((resolve, reject) => {
@@ -19,5 +21,10 @@ export class AuthService {
 
   getAuth() {
     return this.afAuth.authState.pipe(map(auth => auth));
+  }
+
+  logout() {
+    this.afAuth.auth.signOut();
+    this.msg.info('You are now logged Out', 'Logged Out');
   }
 }

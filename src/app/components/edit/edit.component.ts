@@ -14,6 +14,9 @@ export class EditComponent implements OnInit {
 
   id: string;
   customer: Referral;
+  show = false;
+
+
 
   constructor(private refServ: ReferralsService, private route: ActivatedRoute,
     private router: Router, private toast: ToastrService) { }
@@ -22,14 +25,13 @@ export class EditComponent implements OnInit {
 
     this.id = this.route.snapshot.params['id'];
     this.refServ.getReferral(this.id).subscribe(changes => this.customer = changes);
+    this.show = true;
 
   }
 
   onSubmit({value, valid}: { value: Referral, valid: boolean}) {
     // this.refServ.addReferral(this.customer);
     // this.route.navigate(['all-referrals']);
-    console.log(value, valid);
-
     if (!valid) {
       // add error
         console.log('error');
