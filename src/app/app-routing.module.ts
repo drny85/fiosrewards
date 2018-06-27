@@ -1,3 +1,4 @@
+import { AuthGuard } from './guards/auth.guard';
 import { AllComponent } from './components/all/all.component';
 import { LoginComponent } from './components/login/login.component';
 import { PendingComponent } from './components/pending/pending.component';
@@ -15,22 +16,23 @@ import { NewComponent } from './components/new/new.component';
 import { InprogressComponent } from './components/inprogress/inprogress.component';
 
 
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'add-referral',      component: AddReferralComponent },
+  { path: 'add-referral',      component: AddReferralComponent, canActivate: [AuthGuard] },
   {
     path: 'allreferrals',
     component: AllReferralsComponent
   },
-  { path: 'all/details/:id', component: DetailsComponent },
-  { path: 'closed-referrals', component: ClosedReferralsComponent },
-  { path: 'pending', component: PendingComponent },
-  { path: 'edit/:id', component: EditComponent },
-  { path: 'notsold', component: NotsoldComponent },
-  { path: 'new', component: NewComponent },
+  { path: 'all/details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
+  { path: 'closed-referrals', component: ClosedReferralsComponent, canActivate: [AuthGuard] },
+  { path: 'pending', component: PendingComponent, canActivate: [AuthGuard] },
+  { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard] },
+  { path: 'notsold', component: NotsoldComponent, canActivate: [AuthGuard] },
+  { path: 'new', component: NewComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'all', component: AllComponent },
-  { path: 'inprogress', component: InprogressComponent },
+  { path: 'all', component: AllComponent, canActivate: [AuthGuard] },
+  { path: 'inprogress', component: InprogressComponent, canActivate: [AuthGuard] },
 
   { path: '**', component: PagenotfoundComponent }
 ];
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
   exports: [ RouterModule ],
   imports: [
     RouterModule.forRoot(appRoutes)
-  ]
+  ],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
