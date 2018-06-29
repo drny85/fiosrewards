@@ -12,6 +12,8 @@ export interface Referral {
     email?: string;
     mon?: string;
     orderDate: string;
+    due: string;
+    package: string;
     moveIn: string;
     status: string;
     note: string;

@@ -1,93 +1,113 @@
-
 <div *ngIf="customer" class="mb-5">
-  <button class="btn btn-primary pull-right" routerLink="/all">Go Back To Referrals</button>
-</div>
-<br>
-<br>
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-  <div class="form-row">
-    <div class="form-group col">
-      <label for="name">Name</label>
-      <input [ngClass]="{'is-invalid': refName.errors && refName.touched}" type="text" placeholder="First Name" name="name" id="name"
-        #refName="ngModel" class="form-control" [ngModel]="customer?.name" (ngModelChange)="customer.name = $event" required>
-      <div [hidden]="!refName.errors?.required" class="invalid-feeback">
-        Name is required..
+    <button class="btn btn-primary pull-right" routerLink="/all">Go Back To Referrals</button>
+  </div>
+  <br>
+  <br>
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="name">Name</label>
+        <input [ngClass]="{'is-invalid': refName.errors && refName.touched}" type="text" placeholder="First Name" name="name" id="name"
+          #refName="ngModel" class="form-control" [(ngModel)]="customer.name" required>
+        <div [hidden]="!refName.errors?.required" class="invalid-feeback">
+          Name is required..
+        </div>
+  
+      </div>
+      <div class="form-group col">
+        <label for="lname">Last Name</label>
+        <input [ngClass]="{'is-invalid': refLastName.errors && refLastName.touched}" type="text" placeholder="Last Name" name="lname"
+          id="lname" #refLastName="ngModel" class="form-control" [(ngModel)]="customer.lastName" required>
+        <div [hidden]="!refLastName.errors?.required" class="invalid-feeback">
+          Last Name is required..
+        </div>
+      </div>
+      <div [hidden]="customer.status != 'closed'" class="form-group col">
+        <label for="mon">MON</label>
+        <input type="text" name="mon" placeholder="Order Number" id="mon" #refMon="ngModel" class="form-control" [(ngModel)]="customer.mon">
+      </div>
+      <div [hidden]="customer.status != 'closed'" class="form-group col">
+          <label for="orderDate">Order Date</label>
+          <input type="date" name="orderDate" id="orderDate" #refOrder="ngModel" class="form-control" [(ngModel)]="customer.orderDate">
+        </div>
+    </div>
+    <div [hidden]="customer.status !== 'closed'" class="form-row">
+      <div class="form-group col">
+        <label for="Due">Due Date</label>
+        <input class="form-control" type="date" [(ngModel)]="customer.due" name="due" id="due" #refDue="ngModel">
+
+      </div>
+      <div class="form-group col">
+        <label for="package">Package</label>
+        <select class="form-control" [(ngModel)]="customer.package" name="package" id="package" #refPackage="ngModel">
+          <option value="TP Ultimate">TP Ultimate</option>
+          <option value="TP Extreme">TP Extreme</option>
+          <option value="TP Preferred">TP Preferred</option>
+          <option value="TP Custom">TP Custom</option>
+          <option value="Double Play/Gigabit">Double Play/Gigabit</option>
+          <option value="Double Play/100mpbs">Double Play/100mpbs</option>
+          <option value="Gigabit Only">Gigabit Only</option>
+          <option value="Internet Only 100/100">Internet Only 100/100</option>
+        </select>
       </div>
 
     </div>
-    <div class="form-group col">
-      <label for="lname">Last Name</label>
-      <input [ngClass]="{'is-invalid': refLastName.errors && refLastName.touched}" type="text" placeholder="Last Name" name="lname"
-        id="lname" #refLastName="ngModel" class="form-control" [ngModel]="customer?.lastName" (ngModelChange)="customer.lastName = $event" required>
-      <div [hidden]="!refLastName.errors?.required" class="invalid-feeback">
-        Last Name is required..
+    
+    <div class="form-row">
+      <div class="form-group col-md-4 col-xs-4">
+        <label for="address">Address</label>
+        <input type="text" placeholder="Address" name="address" id="address" #refAddress="ngModel" class="form-control" [(ngModel)]="customer.address.street" required>
       </div>
-    </div>
-    <div [hidden]="customer?.status != 'closed'" class="form-group col">
-      <label for="mon">MON</label>
-      <input type="text" name="mon" placeholder="Order Number" id="mon" #refMon="ngModel" class="form-control" [ngModel]="customer?.mon" (ngModelChange)="customer.mon = $event">
-    </div>
-    <div [hidden]="customer?.status != 'closed'" class="form-group col">
-        <label for="orderDate">Order Date</label>
-        <input type="date" name="orderDate" id="orderDate" #refOrder="ngModel" class="form-control" [ngModel]="customer?.orderDate" (ngModelChange)="customer.orderDate = $event">
-      </div>
-  </div>
-  
-  <div class="form-row">
-    <div class="form-group col-md-4 col-xs-4">
-      <label for="address">Address</label>
-      <input type="text" placeholder="Address" name="address" id="address" #refAddress="ngModel" class="form-control" [ngModel]="customer?.address.street" (ngModelChange)="customer.address.street = $event" required>
-    </div>
-    <div class="form-group col">
-      <label for="apt">Apartment</label>
-      <input type="text" name="apt" placeholder="Apt/Suite/Unit" id="apt" #refAddressApt="ngModel" class="form-control" [ngModel]="customer?.address.apt" (ngModelChange)="customer.address.apt = $event">
-    </div>
-    <div class="form-group col-md-3 col-xs-3">
-        <label for="city">City</label>
-        <input type="text" placeholder="City" name="city" id="city" #refAddressCity="ngModel" class="form-control" [ngModel]="customer?.address.city" (ngModelChange)="customer.address.city = $event" required>
+      <div class="form-group col">
+        <label for="apt">Apartment</label>
+        <input type="text" name="apt" placeholder="Apt/Suite/Unit" id="apt" #refAddressApt="ngModel" class="form-control" [(ngModel)]="customer.address.apt">
       </div>
       <div class="form-group col-md-3 col-xs-3">
-        <label for="zipcode">Zip Code</label>
-        <input type="text" placeholder="Zip Code" name="apt" id="zipcode" #refAddressZipcode="ngModel" class="form-control" [ngModel]="customer?.address.zipcode" (ngModelChange)="customer.address.zipcode = $event" required>
-      
-      </div>
-      </div>
-     
-      <div class="form-row">
-      <div class="form-group col-md-3">
-          <label for="phone">Phone</label>
-          <input type="text" placeholder="Phone" name="phone" id="phone" 
-          
-          class="form-control"
-          #refPhone="ngModel" 
-          [ngModel]="customer?.phone" (ngModelChange)="customer.phone = $event" required minlength="10">
+          <label for="city">City</label>
+          <input type="text" placeholder="City" name="city" id="city" #refAddressCity="ngModel" class="form-control" [(ngModel)]="customer.address.city" required>
         </div>
-        <div class="form-group col">
-          <label for="email">Email</label>
-          <input type="text" name="email" placeholder="Email" id="email" #refEmail="ngModel" class="form-control" [ngModel]="customer?.email" (ngModelChange)="customer.email = $event">
+        <div class="form-group col-md-3 col-xs-3">
+          <label for="zipcode">Zip Code</label>
+          <input type="text" placeholder="Zip Code" name="apt" id="zipcode" #refAddressZipcode="ngModel" class="form-control" [(ngModel)]="customer.address.zipcode" required>
+        
         </div>
-        <div class="form-group col">
-            <label for="move">Move In</label>
-            <input type="date" name="move" id="move" #refMove="ngModel" class="form-control" [ngModel]="customer?.moveIn" (ngModelChange)="customer.moveIn = $event" required>
+        </div>
+       
+        <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="phone">Phone</label>
+            <input type="text" placeholder="Phone" name="phone" id="phone" 
+            
+            class="form-control"
+            #refPhone="ngModel" 
+            [(ngModel)]="customer.phone" required minlength="10">
           </div>
           <div class="form-group col">
-              <label for="status">Status</label>
-              <select class="form-control" name="status" id="status" #refStatus="ngModel" [ngModel]="customer?.status" (ngModelChange)="customer.status = $event" required>
-                <option value="new">New</option>
-                <option value="in progress">In progress</option>
-                <option value="pending">Pending</option>
-                <option value="closed">Closed</option>
-                <option value="not sold">Not Sold</option>
-              </select>
+            <label for="email">Email</label>
+            <input type="text" name="email" placeholder="Email" id="email" #refEmail="ngModel" class="form-control" [(ngModel)]="customer.email">
+          </div>
+          <div class="form-group col">
+              <label for="move">Move In</label>
+              <input type="date" name="move" id="move" #refMove="ngModel" class="form-control" [(ngModel)]="customer.moveIn" required>
             </div>
-      </div>
-  
-  <div class="form-group">
-    <label for="note"></label>
-    <textarea class="form-control" name="note" id="" cols="30" rows="3" #refNote="ngModel" [ngModel]="customer?.note" (ngModelChange)="customer.note = $event" ></textarea>
+            <div class="form-group col">
+                <label for="status">Status</label>
+                <select class="form-control" name="status" id="status" #refStatus="ngModel" [(ngModel)]="customer.status" required>
+                  <option value="new">New</option>
+                  <option value="in progress">In progress</option>
+                  <option value="pending">Pending</option>
+                  <option value="closed">Closed</option>
+                  <option value="not sold">Not Sold</option>
+                </select>
+              </div>
+        </div>
+    
+    <div class="form-group">
+      <label for="note"></label>
+      <textarea class="form-control" name="note" id="" cols="30" rows="3" #refNote="ngModel" [(ngModel)]="customer.note" ></textarea>
+    </div>
+    <button [disabled]="!myForm.form.valid" class="btn btn-success btn-block">Update Referral</button>
+  </form>
+  <div>
+    
   </div>
-  <button [disabled]="!myForm.form.valid" class="btn btn-success btn-block">Update Referral</button>
-</form>
-<div>
-  
-</div>

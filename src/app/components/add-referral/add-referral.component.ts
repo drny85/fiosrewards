@@ -30,6 +30,8 @@ export class AddReferralComponent implements OnInit {
     mon: '',
     moveIn: '',
     orderDate: '',
+    due: '',
+    package: '',
     status: '',
     note: ''
 
