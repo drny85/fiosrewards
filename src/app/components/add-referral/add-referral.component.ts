@@ -39,6 +39,7 @@ export class AddReferralComponent implements OnInit {
 
 
   constructor(private refServ: ReferralsService, private route: Router, private toast: ToastrService) {
+
   }
 
   ngOnInit() {

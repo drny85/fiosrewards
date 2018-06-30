@@ -14,7 +14,7 @@ import { Location } from '@angular/common';
 export class EditComponent implements OnInit {
 
   id: string;
-  customer: Referral;
+  customer$;
   show = false;
   currentRoute = '';
   locationURL: string;
@@ -35,10 +35,9 @@ export class EditComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.route.snapshot.params['id'];
-    this.refServ.getReferral(this.id).subscribe(changes => this.customer = changes);
+    this.refServ.getReferral(this.id).subscribe(changes => this.customer$ = changes);
     this.show = true;
     this.currentRoute = this.router.url;
-    console.log(this.currentRoute);
 
   }
 
@@ -51,7 +50,7 @@ export class EditComponent implements OnInit {
 
     } else {
       // add referral
-      this.refServ.updateItem(this.customer);
+      this.refServ.updateItem(this.customer$);
       this.router.navigate([`all/details/${this.id}`]);
       this.toast.success('Referral updated...', 'Updated!' );
 
