@@ -3,7 +3,6 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Referral } from './../../models/referral';
-import { ReferralsService } from './../../services/referrals.service';
 
 @Component({
   selector: 'app-all',
@@ -20,7 +19,6 @@ export class AllComponent implements OnInit {
   constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
-
     this.referralsCollection = this.afs.collection('customer', ref => {
       return ref.orderBy('moveIn');
 

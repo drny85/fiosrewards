@@ -1,9 +1,13 @@
+import { Location } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
+
+
 
 
 @Component({
@@ -19,7 +23,7 @@ export class InprogressComponent implements OnInit {
   show = false;
 
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private location: Location) { }
 
   ngOnInit() {
 
@@ -38,6 +42,10 @@ export class InprogressComponent implements OnInit {
     ))).subscribe(referral => this.referralList = referral);
 
 
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

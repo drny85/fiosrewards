@@ -30,6 +30,8 @@ export class AddReferralComponent implements OnInit {
     mon: '',
     moveIn: '',
     orderDate: '',
+    due: '',
+    package: '',
     status: '',
     note: ''
 
@@ -37,6 +39,7 @@ export class AddReferralComponent implements OnInit {
 
 
   constructor(private refServ: ReferralsService, private route: Router, private toast: ToastrService) {
+
   }
 
   ngOnInit() {
