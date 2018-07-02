@@ -1,36 +1,46 @@
-<div *ngIf="referralList" class="animated rollIn">
-  <div class="mb-5">
-    <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
-  </div>
-  <br>
-  <br>
-  
-  <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Full Name</th>
-          <th scope="col">Address</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Move In</th>
-          <th scope="col">Status</th>
-          <th scope="col"></th>
+<div class="row">
+  <div class="col-md-9 col-lg-10">
+    <div *ngIf="referralList" class="animated rollIn">
+      
+      <div class="mb-5">
+        <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
+      </div>
+      <br>
+      <br>
+      
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Full Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Move In</th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let referral of referralList">
-          <td>{{ referral.name }} {{ referral.lastName }}</td>
-          <td>{{ referral.address.street }}</td>
-          <td>{{ referral.phone }}</td>
-          <td>{{ referral.moveIn | date:"shortDate" }}</td>
-          <td [ngClass]="{'bg-success': referral.status == 'closed', 'bg-warning': referral.status == 'pending', 'bg-info': referral.status == 'new', 'bg-danger': referral.status == 'not sold'}" class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
-          
-          <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        
-        
-      </tfoot>
-    </table>
-</div>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let referral of referralList">
+              <td>{{ referral.name }} {{ referral.lastName }}</td>
+              <td>{{ referral.address.street }}</td>
+              <td>{{ referral.phone }}</td>
+              <td>{{ referral.moveIn | date:"shortDate" }}</td>
+              <td [ngClass]="{'bg-success': referral.status == 'closed', 'bg-warning': referral.status == 'pending', 'bg-info': referral.status == 'new', 'bg-danger': referral.status == 'not sold'}" class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
+              
+              <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            
+            
+          </tfoot>
+        </table>
+    </div>
+  </div>
+  <div class="col-md-3 col-lg-2 ">
+      <div class="text-center pull-right">
+          <round-progress [current]="closedPercent" [max]="100" [radius]="50" [animationDelay]="1" [stroke]="20"></round-progress>{{ (closed / total) | percent:'1.2-2'  }}
+      </div>
+  </div>
+  </div>

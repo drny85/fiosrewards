@@ -24,7 +24,6 @@ export class DetailsComponent implements OnInit {
   ngOnInit() {
     this.url = this.router.url;
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id);
     this.refServ.getReferral(this.id).subscribe(referral => this.referral = referral);
 
   }

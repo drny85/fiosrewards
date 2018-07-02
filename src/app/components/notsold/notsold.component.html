@@ -1,4 +1,4 @@
-<div *ngIf="show; else noItems" class="">
+<div *ngIf="show; else noItems" class="animated fadeIn">
     <div class="mb-5">
         <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
       </div>
@@ -23,7 +23,7 @@
             <td>{{ referral.phone }}</td>
             <td>{{ referral.moveIn | date:"shortDate" }}</td>
             <td class="bg-danger">{{ referral.status | uppercase }}</td>
-            <td><span><i class="fa fa-hourglass-start fa-2x"></i></span></td>
+            <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
           </tr>
         </tbody>
         <tfoot>

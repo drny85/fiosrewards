@@ -18,25 +18,14 @@ export class NotsoldComponent implements OnInit {
   show = false;
 
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private serv: ReferralsService) { }
 
   ngOnInit() {
 
-    this.referralsCollection = this.afs.collection('customer', ref => {
-      return ref.where('status', '==', 'not sold');
-
+   this.serv.getReferrals('status', '==', 'closed').subscribe(ref => {
+     this.referralList = ref;
+     this.show = true;
     });
-    this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
-      a => {const data = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          if ( data.name !== '' || data.name != null) {
-            this.show = true;
-        }
-          return data;
-        }
-    ))).subscribe(referral => this.referralList = referral);
-
-
   }
 
 

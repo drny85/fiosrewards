@@ -8,16 +8,25 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReferralsService {
 
   referralCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   referralDoc: AngularFirestoreDocument<Referral>;
   referral: Observable<Referral>;
+  field = 'status';
+  condition = '==';
+  status = 'closed';
 
   constructor(private afs: AngularFirestore) {
 
-      this.referralCollection = this.afs.collection<Referral>('customer', ref => ref.orderBy('moveIn', 'asc'));
+    this.getReferrals('status', '>', '');
+
+  }
+
+  getReferrals(field: string, condition: any, status: string) {
+    this.referralCollection = this.afs.collection<Referral>('customer', ref => ref.where(field, condition, status));
 
       this.referrals = this.referralCollection.snapshotChanges().pipe(
         map(actions => actions.map(a => {
@@ -27,10 +36,7 @@ export class ReferralsService {
         }))
       );
 
-  }
-
-  getReferrals() {
-    return this.referrals;
+      return this.referrals;
   }
 
   addReferral(referral: Referral) {

@@ -28,6 +28,8 @@ import { NewComponent } from './components/new/new.component';
 import { InprogressComponent } from './components/inprogress/inprogress.component';
 import { LoginComponent } from './components/login/login.component';
 import { AllComponent } from './components/all/all.component';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+
 
 
 
@@ -58,11 +60,10 @@ import { AllComponent } from './components/all/all.component';
     AngularFirestoreModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    AngularFireAuthModule
-
+    AngularFireAuthModule,
+    RoundProgressModule
 
   ],
-
   providers: [ ReferralsService, AuthService ],
   bootstrap: [AppComponent]
 })

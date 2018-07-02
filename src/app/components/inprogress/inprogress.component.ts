@@ -3,7 +3,6 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 
@@ -17,31 +16,22 @@ import { ReferralsService } from './../../services/referrals.service';
 })
 export class InprogressComponent implements OnInit {
 
-  referralsCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   referralList;
   show = false;
+  count: number;
 
 
-  constructor(private afs: AngularFirestore, private location: Location) { }
+  constructor(private serv: ReferralsService, private location: Location) { }
 
   ngOnInit() {
 
-    this.referralsCollection = this.afs.collection('customer', ref => {
-      return ref.where('status', '==', 'in progress');
-
+    this.serv.getReferrals('status', '==', 'in progress').subscribe(ref => {
+      this.referralList = ref;
+      this.count = ref.length;
+      this.show = true;
+      console.log(this.count);
     });
-    this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
-      a => {const data = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          if ( data.name !== '' || data.name != null) {
-              this.show = true;
-          }
-          return data;
-        }
-    ))).subscribe(referral => this.referralList = referral);
-
-
   }
 
   goBack() {
