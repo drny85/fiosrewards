@@ -14,10 +14,11 @@ import { Location } from '@angular/common';
 export class EditComponent implements OnInit {
 
   id: string;
-  customer$;
+  customer$: Referral;
   show = false;
   currentRoute = '';
   locationURL: string;
+  newZip: string;
 
 
 
@@ -39,6 +40,22 @@ export class EditComponent implements OnInit {
     this.show = true;
     this.currentRoute = this.router.url;
 
+  }
+
+  autoFill(e) {
+    this.newZip = e.target.value;
+    if (this.newZip.length === 3 ) {
+      switch ( this.newZip ) {
+        case '107': {
+          this.customer$.address.city = 'Yonkers';
+          break;
+        }
+        case '104': {
+          this.customer$.address.city = 'Bronx';
+          break;
+        }
+      }
+    }
   }
 
   onSubmit({value, valid}: { value: Referral, valid: boolean}) {
