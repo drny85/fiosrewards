@@ -1,7 +1,6 @@
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 
@@ -13,32 +12,29 @@ import { ReferralsService } from './../../services/referrals.service';
 })
 export class PendingComponent implements OnInit {
 
-  referralsCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   referralList;
   show = false;
+  count: number;
+  total: number;
+  pendingPercent: number;
 
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private serv: ReferralsService, private progress: RoundProgressModule) { }
 
   ngOnInit() {
 
-    this.referralsCollection = this.afs.collection('customer', ref => {
-      return ref.where('status', '==', 'pending');
-
+    this.serv.getReferrals('status', '==', 'pending').subscribe(ref => {
+      this.referralList = ref;
+      this.count = ref.length;
     });
-    this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
-      a => {const data = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          if ( data.name !== '' || data.name != null) {
-            this.show = true;
-        }
-          return data;
-        }
-    ))).subscribe(referral => this.referralList = referral);
+    this.serv.getReferrals('status', '>', '').subscribe(ref => {
+      this.total = ref.length;
+      this.pendingPercent = this.count / this.total * 100;
+     });
+    this.show = true;
 
-
-  }
+}
 
 }
 
