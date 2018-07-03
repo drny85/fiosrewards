@@ -1,3 +1,4 @@
+
 import { AuthService } from './services/auth.service';
 import { environment } from './../environments/environment';
 import { ReferralsService } from './services/referrals.service';
@@ -29,6 +30,9 @@ import { InprogressComponent } from './components/inprogress/inprogress.componen
 import { LoginComponent } from './components/login/login.component';
 import { AllComponent } from './components/all/all.component';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { EmailReferralsComponent } from './components/email-referrals/email-referrals.component';
+
 
 
 
@@ -49,7 +53,9 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
     NewComponent,
     InprogressComponent,
     LoginComponent,
-    AllComponent
+    AllComponent,
+    StatisticsComponent,
+    EmailReferralsComponent
 
   ],
   imports: [
@@ -62,9 +68,8 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
     ToastrModule.forRoot(), // ToastrModule added
     AngularFireAuthModule,
     RoundProgressModule
-
   ],
-  providers: [ ReferralsService, AuthService ],
+  providers: [ ReferralsService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

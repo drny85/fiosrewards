@@ -37,12 +37,30 @@ export class AddReferralComponent implements OnInit {
 
 };
 
+newZip: string;
+
 
   constructor(private refServ: ReferralsService, private route: Router, private toast: ToastrService) {
 
   }
 
   ngOnInit() {
+  }
+
+  autoFill(e) {
+    this.newZip = e.target.value;
+    if (this.newZip.length === 3 ) {
+      switch ( this.newZip ) {
+        case '107': {
+          this.customer.address.city = 'Yonkers';
+          break;
+        }
+        case '104': {
+          this.customer.address.city = 'Bronx';
+          break;
+        }
+      }
+    }
   }
 
   onSubmit({value, valid}: { value: Referral, valid: boolean}) {

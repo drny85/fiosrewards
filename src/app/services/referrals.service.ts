@@ -25,7 +25,7 @@ export class ReferralsService {
 
   }
 
-  getReferrals(field: string, condition: any, status: string) {
+  getReferrals(field: string, condition: any, status: any) {
     this.referralCollection = this.afs.collection<Referral>('customer', ref => ref.where(field, condition, status));
 
       this.referrals = this.referralCollection.snapshotChanges().pipe(

@@ -1,3 +1,5 @@
+import { EmailReferralsComponent } from './components/email-referrals/email-referrals.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AllComponent } from './components/all/all.component';
 import { LoginComponent } from './components/login/login.component';
@@ -30,6 +32,8 @@ const appRoutes: Routes = [
   { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard] },
   { path: 'notsold', component: NotsoldComponent, canActivate: [AuthGuard] },
   { path: 'new', component: NewComponent, canActivate: [AuthGuard] },
+  { path: 'email_referrals', component: EmailReferralsComponent, canActivate: [AuthGuard] },
+  { path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'all', component: AllComponent, canActivate: [AuthGuard] },
   { path: 'inprogress', component: InprogressComponent, canActivate: [AuthGuard] },
