@@ -22,7 +22,7 @@ export class NotsoldComponent implements OnInit {
 
   ngOnInit() {
 
-   this.serv.getReferrals('status', '==', 'closed').subscribe(ref => {
+   this.serv.getReferrals('status', '==', 'not sold').subscribe(ref => {
      this.referralList = ref;
      this.show = true;
     });

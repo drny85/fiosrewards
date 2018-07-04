@@ -3,7 +3,6 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Referral } from './../../models/referral';
 
 
@@ -15,7 +14,6 @@ import { Referral } from './../../models/referral';
 })
 export class AllComponent implements OnInit {
 
-  referralsCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   tempR: Observable<Referral[]>;
   referralList;
@@ -25,31 +23,34 @@ export class AllComponent implements OnInit {
   closedPercent: number;
 
 
-  constructor(private afs: AngularFirestore, public progress: RoundProgressModule, private serRef: ReferralsService) {
+  constructor( public progress: RoundProgressModule, private serRef: ReferralsService) {
 
   }
 
   ngOnInit() {
-    this.referralsCollection = this.afs.collection('customer', ref => {
-      ref.where('status', '==', 'closed').get().then(c => this.closed = c.size);
-      ref.get().then(total => {
-        this.total = total.size;
-        this.closedPercent = this.closed / this.total * 100;
-      });
-      return ref.orderBy('moveIn');
-
-
-    });
-    this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
-      a => {const data = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          return data;
-        }
-    ))).subscribe(referral => this.referralList = referral);
-
+    this.serRef.getReferrals('status', '>', '').subscribe(referrals => this.referralList = referrals);
 
   }
 
+  getNew() {
+    this.serRef.getReferrals('status', '==', 'new').subscribe(referrals => this.referralList = referrals);
+  }
+
+  getClosed() {
+    this.serRef.getReferrals('status', '==', 'closed').subscribe(referrals => this.referralList = referrals);
+  }
+
+  getPending() {
+    this.serRef.getReferrals('status', '==', 'pending').subscribe(referrals => this.referralList = referrals);
+  }
+
+  getProgress() {
+    this.serRef.getReferrals('status', '==', 'in progress').subscribe(referrals => this.referralList = referrals);
+  }
+
+  getNotSold() {
+    this.serRef.getReferrals('status', '==', 'not sold').subscribe(referrals => this.referralList = referrals);
+  }
 
 
 }

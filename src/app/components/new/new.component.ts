@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
 import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 
@@ -12,30 +11,22 @@ import { ReferralsService } from './../../services/referrals.service';
 })
 export class NewComponent implements OnInit {
 
-  referralsCollection: AngularFirestoreCollection<Referral>;
-  referrals: Observable<Referral[]>;
   referralList;
   show = false;
 
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private serv: ReferralsService) { }
 
   ngOnInit() {
 
-    this.referralsCollection = this.afs.collection('customer', ref => {
-      return ref.where('status', '==', 'new').orderBy('moveIn');
-
+    this.serv.getReferrals('status', '==', 'new').subscribe(newF => {
+      this.referralList = newF;
     });
-    this.referralsCollection.snapshotChanges().pipe(map(changes => changes.map(
-      a => {const data = a.payload.doc.data();
-          data.id = a.payload.doc.id;
-          if ( data.name !== '' || data.name != null) {
-            this.show = true;
-        }
-          return data;
-        }
-    ))).subscribe(referral => this.referralList = referral);
-
-
+    this.show = true;
   }
+
+  // this.serv.getReferrals('status', '==', 'new').subscribe(newF => {
+  //   this.referralList = newF.filter(r => r.name === 'David' || r.name === 'David');
+  // });
+  // this.show = true;
 }
