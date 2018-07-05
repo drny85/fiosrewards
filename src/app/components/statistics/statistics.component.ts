@@ -26,7 +26,7 @@ export class StatisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serv.getReferrals('status', '>', '').forEach((r) => {
+    this.serv.getReferrals().forEach((r) => {
       this.total = r.length;
       r.forEach((referral => {
         if (referral.status === 'closed') {

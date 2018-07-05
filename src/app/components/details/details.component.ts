@@ -32,7 +32,7 @@ export class DetailsComponent implements OnInit {
     if (confirm('Are you sure you want to delete it?')) {
       this.refServ.deleteReferral(this.id);
       this.toast.info('Referral has been deleted', 'Deteled');
-      this.router.navigate(['allreferrals']);
+      this.router.navigate(['all']);
     }
     this.toast.info('No changes were made', 'Canceled');
   }

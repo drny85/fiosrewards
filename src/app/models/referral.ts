@@ -17,5 +17,6 @@ export interface Referral {
     moveIn: string;
     status: string;
     note: string;
+    referredBy?: string;
 
 }

@@ -19,6 +19,9 @@ export class EditComponent implements OnInit {
   currentRoute = '';
   locationURL: string;
   newZip: string;
+  other = false;
+
+  senders: any[] = [{name: 'Keith Thompson' }, {name: 'Anthony Williams' }, {name: 'Arthur Pepaj' }, {name: 'Manny Silberberg' }];
 
 
 
@@ -72,6 +75,21 @@ export class EditComponent implements OnInit {
       this.toast.success('Referral updated...', 'Updated!' );
 
     }
+  }
+
+  setSender(e) {
+    if (e === 'other') {
+      this.other = true;
+      this.customer$.referredBy = e;
+    } else {
+      this.customer$.referredBy = e;
+      this.other = false;
+    }
+  }
+
+  setSender2(e) {
+    this.customer$.referredBy = e.target.value;
+    console.log(e.target.value);
   }
 
 }

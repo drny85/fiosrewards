@@ -33,11 +33,14 @@ export class AddReferralComponent implements OnInit {
     due: '',
     package: '',
     status: '',
-    note: ''
+    note: '',
+    referredBy: ''
 
 };
 
+senders: any[] = [{name: 'Keith Thompson' }, {name: 'Anthony Williams' }, {name: 'Arthur Pepaj' }, {name: 'Manny Silberberg' }];
 newZip: string;
+other = false;
 
 
   constructor(private refServ: ReferralsService, private route: Router, private toast: ToastrService) {
@@ -79,6 +82,21 @@ newZip: string;
       this.toast.success('Referral Added...', 'Added!' );
 
     }
+  }
+
+  setSender(e) {
+    if (e === 'other') {
+      this.other = true;
+      this.customer.referredBy = e;
+    } else {
+      this.customer.referredBy = e;
+      this.other = false;
+    }
+  }
+
+  setSender2(e) {
+    this.customer.referredBy = e.target.value;
+    console.log(e.target.value);
   }
 
 }

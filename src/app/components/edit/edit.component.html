@@ -101,6 +101,18 @@
                 </select>
               </div>
         </div>
+        <div class="form-group">
+            <label for="sender">Referred By</label>
+            <select class="form-control" #selectElem (change)="setSender(selectElem.value)">
+              <option disabled value="">Select a name</option>
+              <option *ngFor="let sender of senders" [value]="sender.name">
+                  {{sender.name}}
+              </option>
+              <option value="other">Other</option>
+          </select>
+            <input *ngIf="other" class="form-control" (keyup)="setSender2($event)" type="text" name="referredBy" placeholder="Who sent this referral?" id="sender" #refSender [(ngModel)]=customer.referredlBy >
+          </div>
+         
     
     <div class="form-group">
       <label for="note"></label>

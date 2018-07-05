@@ -22,7 +22,7 @@ export class ClosedReferralsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.serv.getReferrals('status', '==', 'closed').subscribe(closed => this.referralList = closed );
+    this.serv.getReferrals().subscribe(closed => this.referralList = closed.filter(r => r.status === 'closed') );
     this.show = true;
 
   }

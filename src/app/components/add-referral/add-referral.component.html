@@ -8,9 +8,9 @@
   <div class="form-row">
     <div class="form-group col">
       <label for="name">Name</label>
-      <input [ngClass]="{'is-invalid': refName.errors && refName.touched}" type="text" placeholder="First Name" name="name" id="name"
-        #refName="ngModel" class="form-control" [(ngModel)]="customer.name" required>
-      <div [hidden]="!refName.errors?.required" class="invalid-feeback">
+      <input type="text" placeholder="First Name" name="name" id="name"
+        #refName="ngModel" class="form-control" [ngClass]="{'is-invalid': refName.errors && refName.touched}" [(ngModel)]="customer.name" required>
+      <div *ngIf="refName.invalid && refName.touched" class="invalid-feedback">
         Name is required..
       </div>
 
@@ -19,7 +19,7 @@
       <label for="lname">Last Name</label>
       <input [ngClass]="{'is-invalid': refLastName.errors && refLastName.touched}" type="text" placeholder="Last Name" name="lname"
         id="lname" #refLastName="ngModel" class="form-control" [(ngModel)]="customer.lastName" required>
-      <div [hidden]="!refLastName.errors?.required" class="invalid-feeback">
+      <div [hidden]="!refLastName.errors?.required" class="invalid-feedback">
         Last Name is required..
       </div>
     </div>
@@ -57,9 +57,13 @@
   <div class="form-row">
     <div class="form-group col-md-4 col-xs-4">
       <label for="address">Address</label>
-      <input type="text" placeholder="Address" name="address" id="address" #refAddress="ngModel" class="form-control" [(ngModel)]="customer.address.street"
+      <input [ngClass]="{'is-invalid': refAddress.touched && refAddress.errors}" type="text" placeholder="Address" name="address" id="address" #refAddress="ngModel" class="form-control" [(ngModel)]="customer.address.street"
         required>
+        <div [hidden]="!refAddress.errors?.required" class="invalid-feedback">
+          Address is required..
+        </div>
     </div>
+   
     <div class="form-group col">
       <label for="apt">Apartment</label>
       <input type="text" name="apt" placeholder="Apt/Suite/Unit" id="apt" #refAddressApt="ngModel" class="form-control" [(ngModel)]="customer.address.apt">
@@ -78,8 +82,11 @@
   <div class="form-row">
     <div class="form-group col-md-3">
       <label for="phone">Phone</label>
-      <input type="text" placeholder="Phone" name="phone" id="phone" class="form-control" #refPhone="ngModel" [(ngModel)]="customer.phone"
-        required minlength="10">
+      <input type="text" placeholder="Phone" name="phone" [ngClass]="{'is-invalid': refPhone.touched && refPhone.errors, 'is-valid': refPhone.valid}" id="phone" class="form-control" #refPhone="ngModel" [(ngModel)]="customer.phone"
+        required minlength="10" required>
+        <div [hidden]="!refPhone.errors?.required" class="invalid-feedback">
+          Phone is required..
+        </div>
     </div>
     <div class="form-group col">
       <label for="email">Email</label>
@@ -101,7 +108,18 @@
       </select>
     </div>
   </div>
-
+  <div class="form-group">
+    <label for="sender">Referred By</label>
+    <select class="form-control" #selectElem (change)="setSender(selectElem.value)">
+      <option disabled value="">Select a name</option>
+      <option *ngFor="let sender of senders" [value]="sender.name">
+          {{sender.name}}
+      </option>
+      <option value="other">Other</option>
+  </select>
+    <input *ngIf="other" class="form-control" (keyup)="setSender2($event)" type="text" name="referredBy" placeholder="Who sent this referral?" id="sender" #refSender [(ngModel)]=customer.referredlBy >
+  </div>
+  {{ customer.referredBy }}  {{ customer.name }}
   <div class="form-group">
     <label for="note"></label>
     <textarea class="form-control" name="note" id="" cols="30" rows="3" #refNote="ngModel" [(ngModel)]="customer.note"></textarea>
