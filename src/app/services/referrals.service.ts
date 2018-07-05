@@ -21,12 +21,12 @@ export class ReferralsService {
 
   constructor(private afs: AngularFirestore) {
 
-    this.getReferrals('status', '>', '');
+    this.getReferrals();
 
   }
 
-  getReferrals(field: string, condition: any, status: any) {
-    this.referralCollection = this.afs.collection<Referral>('customer', ref => ref.where(field, condition, status));
+  getReferrals() {
+    this.referralCollection = this.afs.collection<Referral>('customer', ref => ref.orderBy('moveIn', 'asc'));
 
       this.referrals = this.referralCollection.snapshotChanges().pipe(
         map(actions => actions.map(a => {

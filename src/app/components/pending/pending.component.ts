@@ -24,15 +24,13 @@ export class PendingComponent implements OnInit {
 
   ngOnInit() {
 
-    this.serv.getReferrals('status', '==', 'pending').subscribe(ref => {
-      this.referralList = ref;
-      this.count = ref.length;
-    });
-    this.serv.getReferrals('status', '>', '').subscribe(ref => {
+    this.serv.getReferrals().subscribe(ref => {
+      this.referralList = ref.filter(r => r.status === 'pending');
+      this.count = ref.filter(r => r.status === 'pending').length;
       this.total = ref.length;
       this.pendingPercent = this.count / this.total * 100;
-     });
-    this.show = true;
+      this.show = true;
+    });
 
 }
 

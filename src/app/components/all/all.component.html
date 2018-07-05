@@ -1,6 +1,5 @@
-<div class="row">
-  <div class="col-md-9 col-lg-10">
-    <div *ngIf="referralList" class="animated rollIn">
+
+    <div *ngIf="referralList" class="animated fadeIn">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" (click)="getNew()" class="btn btn-secondary">NEW</button>
         <button type="button" (click)="getClosed()" class="btn btn-success">CLOSED</button>
@@ -8,10 +7,15 @@
         <button type="button" (click)="getProgress()" class="btn btn-info">IN PROGRESS</button>
         <button type="button" (click)="getNotSold()" class="btn btn-danger">NOT SOLD</button>
       </div>
-      <div class="mb-5">
-        <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
-      </div>
       <br>
+      <div class="row mt-5">
+        <div class="col-lg-10">
+            <input class="form-control" type="search" (keyup)="onSearch($event)" name="search" placeholder="Search for referral....">
+        </div>
+        <div class="col">
+              <button class="btn btn-primary" routerLink="/add-referral">Add New Referral</button>
+          </div>
+    </div>
       <br>
       
       <table class="table table-striped">
@@ -43,10 +47,4 @@
           </tfoot>
         </table>
     </div>
-  </div>
-  <div class="col-md-3 col-lg-2 ">
-      <div class="text-center pull-right">
-          <round-progress [current]="closedPercent" [max]="100" [radius]="50" [animationDelay]="1" [stroke]="20"></round-progress>{{ (closed / total) | percent:'1.2-2'  }}
-      </div>
-  </div>
-  </div>
+

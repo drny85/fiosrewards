@@ -1,9 +1,11 @@
+import { FormsModule } from '@angular/Forms';
 import { ReferralsService } from './../../services/referrals.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Referral } from './../../models/referral';
+
 
 
 
@@ -21,6 +23,7 @@ export class AllComponent implements OnInit {
   closed: number;
   total: number;
   closedPercent: number;
+  search: string;
 
 
   constructor( public progress: RoundProgressModule, private serRef: ReferralsService) {
@@ -28,30 +31,41 @@ export class AllComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serRef.getReferrals('status', '>', '').subscribe(referrals => this.referralList = referrals);
 
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals);
   }
 
   getNew() {
-    this.serRef.getReferrals('status', '==', 'new').subscribe(referrals => this.referralList = referrals);
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals.filter(r => r.status === 'new'));
   }
 
   getClosed() {
-    this.serRef.getReferrals('status', '==', 'closed').subscribe(referrals => this.referralList = referrals);
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals.filter(r => r.status === 'closed'));
   }
 
   getPending() {
-    this.serRef.getReferrals('status', '==', 'pending').subscribe(referrals => this.referralList = referrals);
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals.filter(r => r.status === 'pending'));
   }
 
   getProgress() {
-    this.serRef.getReferrals('status', '==', 'in progress').subscribe(referrals => this.referralList = referrals);
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals.filter(r => r.status === 'in progress'));
   }
 
   getNotSold() {
-    this.serRef.getReferrals('status', '==', 'not sold').subscribe(referrals => this.referralList = referrals);
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals.filter(r => r.status === 'not sold'));
   }
 
+  onSearch(e) {
+    this.search = e.target.value;
+    if ( this.search.length > 0 ) {
+      this.serRef.getReferrals().subscribe(ref => {
+        this.referralList = ref.filter(status => status.name.toLowerCase() === this.search.toLowerCase());
+
+      });
+    } else {
+      this.serRef.getReferrals().subscribe(ref => this.referralList = ref);
+    }
+  }
 
 }
 
