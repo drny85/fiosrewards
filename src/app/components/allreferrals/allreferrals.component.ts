@@ -16,7 +16,7 @@ export class AllReferralsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.refServ.getReferrals('status', '>', '').subscribe(ref =>
+    this.refServ.getReferrals().subscribe(ref =>
       this.referrals = ref
     );
 

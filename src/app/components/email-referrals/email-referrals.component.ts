@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-import { Referral } from './../../models/referral';
 import { Location } from '@angular/common';
 import { ReferralsService } from './../../services/referrals.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmailReferralsComponent implements OnInit {
 
-  referrals: Observable<Referral[]>;
   referralList;
   show = false;
   count: number;
@@ -21,8 +18,8 @@ export class EmailReferralsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.serv.getReferrals('email', '>', 'none').subscribe(ref => {
-      this.referralList = ref;
+    this.serv.getReferrals().subscribe(ref => {
+      this.referralList = ref.filter(r => r.email.length > 5);
       this.count = ref.length;
       this.show = true;
     });
