@@ -19,8 +19,8 @@ export class NewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.serv.getReferrals('status', '==', 'new').subscribe(newF => {
-      this.referralList = newF;
+    this.serv.getReferrals().subscribe(newF => {
+      this.referralList = newF.filter(f => f.status === 'new');
     });
     this.show = true;
   }

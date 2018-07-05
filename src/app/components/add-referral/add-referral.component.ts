@@ -78,7 +78,7 @@ other = false;
     } else {
       // add referral
       this.refServ.addReferral(this.customer);
-      this.route.navigate(['allreferrals']);
+      this.route.navigate(['new']);
       this.toast.success('Referral Added...', 'Added!' );
 
     }

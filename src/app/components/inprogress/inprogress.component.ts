@@ -27,7 +27,7 @@ export class InprogressComponent implements OnInit {
   ngOnInit() {
 
     this.serv.getReferrals().subscribe(ref => {
-      this.referralList = ref.filter(r => r.status === 'pending');
+      this.referralList = ref.filter(r => r.status === 'in progress');
       this.count = ref.length;
       this.show = true;
       console.log(this.count);

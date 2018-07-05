@@ -22,8 +22,8 @@ export class NotsoldComponent implements OnInit {
 
   ngOnInit() {
 
-   this.serv.getReferrals('status', '==', 'not sold').subscribe(ref => {
-     this.referralList = ref;
+   this.serv.getReferrals().subscribe(ref => {
+     this.referralList = ref.filter(r => r.status === 'not sold');
      this.show = true;
     });
   }

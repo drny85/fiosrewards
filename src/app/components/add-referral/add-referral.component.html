@@ -1,4 +1,4 @@
-
+<h3 class="text-center mb-5">Add a New Referral</h3>
 <div ngIg="customer" class="mb-5">
   <button class="btn btn-primary pull-right" routerLink="/all">Go Back To Referrals</button>
 </div>
@@ -108,6 +108,7 @@
       </select>
     </div>
   </div>
+
   <div class="form-group">
     <label for="sender">Referred By</label>
     <select class="form-control" #selectElem (change)="setSender(selectElem.value)">
@@ -119,7 +120,7 @@
   </select>
     <input *ngIf="other" class="form-control" (keyup)="setSender2($event)" type="text" name="referredBy" placeholder="Who sent this referral?" id="sender" #refSender [(ngModel)]=customer.referredlBy >
   </div>
-  {{ customer.referredBy }}  {{ customer.name }}
+ 
   <div class="form-group">
     <label for="note"></label>
     <textarea class="form-control" name="note" id="" cols="30" rows="3" #refNote="ngModel" [(ngModel)]="customer.note"></textarea>
