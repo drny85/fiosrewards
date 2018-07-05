@@ -1,7 +1,5 @@
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 
 
@@ -12,7 +10,6 @@ import { ReferralsService } from './../../services/referrals.service';
 })
 export class PendingComponent implements OnInit {
 
-  referrals: Observable<Referral[]>;
   referralList;
   show = false;
   count: number;

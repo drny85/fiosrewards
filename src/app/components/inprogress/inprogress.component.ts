@@ -1,9 +1,5 @@
 import { Location } from '@angular/common';
-
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 
 
@@ -16,7 +12,6 @@ import { ReferralsService } from './../../services/referrals.service';
 })
 export class InprogressComponent implements OnInit {
 
-  referrals: Observable<Referral[]>;
   referralList;
   show = false;
   count: number;

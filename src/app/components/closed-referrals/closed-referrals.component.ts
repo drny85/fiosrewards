@@ -1,6 +1,3 @@
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Referral } from './../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClosedReferralsComponent implements OnInit {
 
-  referrals: Observable<Referral[]>;
   referralList;
   show = false;
 
