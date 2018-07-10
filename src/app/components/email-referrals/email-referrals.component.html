@@ -1,5 +1,24 @@
 <h3 class="text-center mb-5">Referrals with Email.</h3>
 <div class="mb-5">
+  <ul class="nav nav-tabs">
+      <li class="nav-item">
+          <a routerLinkActive="active current" class="nav-link" active (click)="getAll()" >All</a>
+      </li>
+    <li class="nav-item" [ngClass]="{'nav-active': active }">
+      <a routerLinkActive="active current" class="nav-link" (click)="getNew()">New</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active" class="nav-link" (click)="getPending()">Pending</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active current" class="nav-link" (click)="getProgress()">Progress</a>
+    </li>
+    <li class="nav-item">
+      <a routerLinkActive="active current" class="nav-link" (click)="getClosed()" >Closed</a>
+    </li>
+  </ul>
+</div>
+<div class="mb-5">
   <button class="btn btn-primary pull-left" (click)="goBack()"><i class="fa fa-arrow-left"></i> Go Back</button>
 
   <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
@@ -13,6 +32,7 @@
         <tr>
           <th scope="col">Full Name</th>
           <th scope="col">Address</th>
+          <th scope="col">Apt</th>
           <th scope="col">Phone</th>
           <th scope="col">Move In</th>
           <th scope="col">Status</th>
@@ -25,6 +45,7 @@
         <tr *ngFor="let referral of referralList">
           <td>{{ referral.name }} {{ referral.lastName }}</td>
           <td>{{ referral.address.street }}</td>
+          <td>{{ referral.address.apt }}</td>
           <td>{{ referral.phone }}</td>
           <td>{{ referral.moveIn | date:"shortDate" }}</td>
           <td class="bg-secondary">{{ referral.status | uppercase }}</td>

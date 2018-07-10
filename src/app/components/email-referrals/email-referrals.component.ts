@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ReferralsService } from './../../services/referrals.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,10 +15,13 @@ export class EmailReferralsComponent implements OnInit {
   count: number;
 
 
-  constructor(private serv: ReferralsService, private location: Location) { }
+  constructor(private serv: ReferralsService, private location: Location, private router: Router) { }
 
   ngOnInit() {
+    this.getAll();
+  }
 
+  getAll() {
     this.serv.getReferrals().subscribe(ref => {
       this.referralList = ref.filter(r => r.email.length > 5);
       this.count = ref.length;
@@ -27,6 +31,22 @@ export class EmailReferralsComponent implements OnInit {
 
   goBack() {
     this.location.back();
+  }
+
+  getNew() {
+    this.serv.getReferrals().subscribe(ref => this.referralList = ref.filter(r => r.status === 'new' && r.email.length > 5));
+  }
+
+  getClosed() {
+    this.serv.getReferrals().subscribe(ref => this.referralList = ref.filter(r => r.status === 'closed' && r.email.length > 5));
+  }
+
+  getPending() {
+    this.serv.getReferrals().subscribe(ref => this.referralList = ref.filter(r => r.status === 'pending' && r.email.length > 5 ));
+  }
+
+  getProgress() {
+    this.serv.getReferrals().subscribe(ref => this.referralList = ref.filter(r => r.status === 'in progress' && r.email.length > 5));
   }
 
 }

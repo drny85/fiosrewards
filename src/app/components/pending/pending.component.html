@@ -12,6 +12,7 @@
           <tr>
             <th scope="col">Full Name</th>
             <th scope="col">Address</th>
+            <th scope="col">Apt</th>
             <th scope="col">Phone</th>
             <th scope="col">Move In</th>
             <th scope="col">Status</th>
@@ -23,6 +24,7 @@
           <tr *ngFor="let referral of referralList">
             <td>{{ referral.name }} {{ referral.lastName }}</td>
             <td>{{ referral.address.street }}</td>
+            <td>{{ referral.address.apt }}</td>
             <td>{{ referral.phone }}</td>
             <td>{{ referral.moveIn | date:"shortDate" }}</td>
             <td class="bg-warning">{{ referral.status | uppercase }}</td>

@@ -70,7 +70,7 @@ sender: Sender = {
     }
   }
 
-  private onSubmit({value, valid}: { value: Referral, valid: boolean}) {
+  onSubmit({value, valid}: { value: Referral, valid: boolean}) {
     // this.refServ.addReferral(this.customer);
     // this.route.navigate(['all-referrals']);
 
@@ -82,7 +82,6 @@ sender: Sender = {
       // add referral
       this.refServ.addReferral(this.customer);
       this.sender.name = this.customer.referredBy;
-      this.refServ.addSender(this.sender, this.customer.referredBy.toLowerCase());
       this.route.navigate(['new']);
       this.toast.success('Referral Added...', 'Added!' );
 
