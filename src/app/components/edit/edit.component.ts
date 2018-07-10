@@ -13,16 +13,38 @@ import { Location } from '@angular/common';
 })
 export class EditComponent implements OnInit {
 
+  senders;
+
+  customer: Referral = {
+    id: '',
+    name: '',
+    lastName: '',
+    address: {
+        street: '',
+        apt: '',
+        city: '',
+        zipcode: ''
+    },
+    phone: '',
+    email: '',
+    mon: '',
+    moveIn: '',
+    orderDate: '',
+    due: '',
+    package: '',
+    status: '',
+    note: '',
+    referredBy: ''
+
+};
+
+
   id: string;
-  customer$: Referral;
   show = false;
   currentRoute = '';
   locationURL: string;
   newZip: string;
   other = false;
-
-  senders: any[] = [{name: 'Keith Thompson' }, {name: 'Anthony Williams' }, {name: 'Arthur Pepaj' }, {name: 'Manny Silberberg' }];
-
 
 
   constructor(private refServ: ReferralsService, private route: ActivatedRoute,
@@ -39,9 +61,10 @@ export class EditComponent implements OnInit {
   ngOnInit() {
 
     this.id = this.route.snapshot.params['id'];
-    this.refServ.getReferral(this.id).subscribe(changes => this.customer$ = changes);
+    this.refServ.getReferral(this.id).subscribe(changes => this.customer = changes);
     this.show = true;
     this.currentRoute = this.router.url;
+    this.refServ.getSenders().subscribe(ref => this.senders = ref);
 
   }
 
@@ -50,11 +73,11 @@ export class EditComponent implements OnInit {
     if (this.newZip.length === 3 ) {
       switch ( this.newZip ) {
         case '107': {
-          this.customer$.address.city = 'Yonkers';
+          this.customer.address.city = 'Yonkers';
           break;
         }
         case '104': {
-          this.customer$.address.city = 'Bronx';
+          this.customer.address.city = 'Bronx';
           break;
         }
       }
@@ -70,7 +93,7 @@ export class EditComponent implements OnInit {
 
     } else {
       // add referral
-      this.refServ.updateItem(this.customer$);
+      this.refServ.updateItem(this.customer);
       this.router.navigate([`all/details/${this.id}`]);
       this.toast.success('Referral updated...', 'Updated!' );
 
@@ -80,15 +103,15 @@ export class EditComponent implements OnInit {
   setSender(e) {
     if (e === 'other') {
       this.other = true;
-      this.customer$.referredBy = e;
+      this.customer.referredBy = e;
     } else {
-      this.customer$.referredBy = e;
+      this.customer.referredBy = e;
       this.other = false;
     }
   }
 
   setSender2(e) {
-    this.customer$.referredBy = e.target.value;
+    this.customer.referredBy = e.target.value;
     console.log(e.target.value);
   }
 

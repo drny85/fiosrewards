@@ -1,50 +1,51 @@
-
-    <div *ngIf="referralList" class="animated fadeIn">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" (click)="getNew()" class="btn btn-secondary">NEW</button>
-        <button type="button" (click)="getClosed()" class="btn btn-success">CLOSED</button>
-        <button type="button" (click)="getPending()" class="btn btn-warning">PENDING</button>
-        <button type="button" (click)="getProgress()" class="btn btn-info">IN PROGRESS</button>
-        <button type="button" (click)="getNotSold()" class="btn btn-danger">NOT SOLD</button>
-      </div>
-      <br>
-      <div class="row mt-5">
-        <div class="col-lg-10">
-            <input class="form-control" type="search" (keyup)="onSearch($event)" name="search" placeholder="Search for referral....">
-        </div>
-        <div class="col">
-              <button class="btn btn-primary" routerLink="/add-referral">Add New Referral</button>
-          </div>
+<div *ngIf="referralList" class="animated fadeIn">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" (click)="getNew()" class="btn btn-secondary">NEW</button>
+    <button type="button" (click)="getClosed()" class="btn btn-success">CLOSED</button>
+    <button type="button" (click)="getPending()" class="btn btn-warning">PENDING</button>
+    <button type="button" (click)="getProgress()" class="btn btn-info">IN PROGRESS</button>
+    <button type="button" (click)="getNotSold()" class="btn btn-danger">NOT SOLD</button>
+  </div>
+  <br>
+  <div class="row mt-5">
+    <div class="col-lg-10">
+      <input class="form-control" type="search" (keyup)="onSearch($event)" name="search" placeholder="Search for referral....">
     </div>
-      <br>
-      
-      <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Full Name</th>
-              <th scope="col">Address</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Move In</th>
-              <th scope="col">Status</th>
-              <th scope="col"></th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let referral of referralList">
-              <td>{{ referral.name }} {{ referral.lastName }}</td>
-              <td>{{ referral.address.street }}</td>
-              <td>{{ referral.phone }}</td>
-              <td>{{ referral.moveIn | date:"shortDate" }}</td>
-              <td [ngClass]="{'bg-success': referral.status == 'closed', 'bg-warning': referral.status == 'pending', 'bg-info': referral.status == 'new', 'bg-danger': referral.status == 'not sold'}" class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
-              
-              <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            
-            
-          </tfoot>
-        </table>
+    <div class="col">
+      <button class="btn btn-primary" routerLink="/add-referral">Add New Referral</button>
     </div>
+  </div>
+  <br>
 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Move In</th>
+        <th scope="col">Status</th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let referral of referralList">
+        <td>{{ referral.name }} {{ referral.lastName }}</td>
+        <td>{{ referral.address.street }}</td>
+        <td>{{ referral.phone }}</td>
+        <td>{{ referral.moveIn | date:"shortDate" }}</td>
+        <td [ngClass]="{'bg-success': referral.status == 'closed', 'bg-warning': referral.status == 'pending', 'bg-info': referral.status == 'new', 'bg-danger': referral.status == 'not sold'}"
+          class="bg-secondary text-white text-center">{{ referral.status | uppercase }}</td>
+
+        <td>
+          <a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+
+
+    </tfoot>
+  </table>
+</div>

@@ -1,3 +1,4 @@
+<h3 class="text-center mb-5">Referrals with Email.</h3>
 <div class="mb-5">
   <button class="btn btn-primary pull-left" (click)="goBack()"><i class="fa fa-arrow-left"></i> Go Back</button>
 
@@ -26,9 +27,8 @@
           <td>{{ referral.address.street }}</td>
           <td>{{ referral.phone }}</td>
           <td>{{ referral.moveIn | date:"shortDate" }}</td>
-          <td class="bg-warning">{{ referral.status | uppercase }}</td>
-          <td><span><i class="fa fa-hourglass-start fa-2x"></i></span></td>
-          <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
+          <td class="bg-secondary">{{ referral.status | uppercase }}</td>
+          <td><a class="btn btn-secondary btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
         </tr>
       </tbody>
       <tfoot>

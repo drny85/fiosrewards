@@ -3,8 +3,7 @@ import { Referral } from '../../models/referral';
 import { ReferralsService } from './../../services/referrals.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+
 
 
 
@@ -33,9 +32,11 @@ export class DetailsComponent implements OnInit {
       this.refServ.deleteReferral(this.id);
       this.toast.info('Referral has been deleted', 'Deteled');
       this.router.navigate(['all']);
-    }
+    } else {
     this.toast.info('No changes were made', 'Canceled');
   }
+
+}
 
 }
 

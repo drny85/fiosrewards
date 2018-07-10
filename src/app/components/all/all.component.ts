@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { FormsModule } from '@angular/Forms';
 import { ReferralsService } from './../../services/referrals.service';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -18,15 +19,17 @@ export class AllComponent implements OnInit {
   total: number;
   closedPercent: number;
   search: string;
+  senders;
 
 
   constructor( public progress: RoundProgressModule, private serRef: ReferralsService) {
 
   }
 
-  ngOnInit() {
+   ngOnInit() {
 
     this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals);
+    this.serRef.getSenders().subscribe(ref => this.senders = ref);
   }
 
   getNew() {

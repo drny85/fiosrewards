@@ -1,8 +1,11 @@
+import { ToastrModule } from 'ngx-toastr';
+import { Sender } from './../models/sender';
 import { Referral } from '../models/referral';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 
 
 @Injectable({
@@ -11,13 +14,16 @@ import { map } from 'rxjs/operators';
 
 export class ReferralsService {
 
+  current: any = '';
+
   referralCollection: AngularFirestoreCollection<Referral>;
   referrals: Observable<Referral[]>;
   referralDoc: AngularFirestoreDocument<Referral>;
   referral: Observable<Referral>;
-  field = 'status';
-  condition = '==';
-  status = 'closed';
+  // to add a referral by....
+  sendersColl: AngularFirestoreCollection<Sender>;
+  senderDoc: AngularFirestoreDocument;
+  senders: Observable<Sender[]>;
 
   constructor(private afs: AngularFirestore) {
 
@@ -37,6 +43,24 @@ export class ReferralsService {
       );
 
       return this.referrals;
+  }
+
+  getSenders() {
+    this.sendersColl = this.afs.collection('senders', ref => ref.orderBy('name'));
+    this.senders = this.sendersColl.valueChanges();
+    return this.senders;
+
+  }
+
+  addSender(sender: Sender, user: string) {
+   this.getSenders().subscribe(ref => this.current = ref.filter(r =>  r.name === user.toLowerCase()));
+   if (this.current.length > 1 ) {
+     this.sendersColl.add(sender);
+     console.log(this.current);
+   } else {
+     console.log('Something is not right');
+     console.log(this.current);
+   }
   }
 
   addReferral(referral: Referral) {

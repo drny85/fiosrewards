@@ -1,10 +1,9 @@
+import { Sender } from './../../models/sender';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ReferralsService } from './../../services/referrals.service';
 import { Referral } from './../../models/referral';
 import { Component, OnInit } from '@angular/core';
-
-
 
 
 @Component({
@@ -38,9 +37,13 @@ export class AddReferralComponent implements OnInit {
 
 };
 
-senders: any[] = [{name: 'Keith Thompson' }, {name: 'Anthony Williams' }, {name: 'Arthur Pepaj' }, {name: 'Manny Silberberg' }];
+senders;
 newZip: string;
 other = false;
+
+sender: Sender = {
+  name: ''
+};
 
 
   constructor(private refServ: ReferralsService, private route: Router, private toast: ToastrService) {
@@ -48,6 +51,7 @@ other = false;
   }
 
   ngOnInit() {
+    this.refServ.getSenders().subscribe(ref => this.senders = ref);
   }
 
   autoFill(e) {
@@ -66,10 +70,9 @@ other = false;
     }
   }
 
-  onSubmit({value, valid}: { value: Referral, valid: boolean}) {
+  private onSubmit({value, valid}: { value: Referral, valid: boolean}) {
     // this.refServ.addReferral(this.customer);
     // this.route.navigate(['all-referrals']);
-    console.log(value, valid);
 
     if (!valid) {
       // add error
@@ -78,6 +81,8 @@ other = false;
     } else {
       // add referral
       this.refServ.addReferral(this.customer);
+      this.sender.name = this.customer.referredBy;
+      this.refServ.addSender(this.sender, this.customer.referredBy.toLowerCase());
       this.route.navigate(['new']);
       this.toast.success('Referral Added...', 'Added!' );
 
@@ -96,7 +101,7 @@ other = false;
 
   setSender2(e) {
     this.customer.referredBy = e.target.value;
-    console.log(e.target.value);
+
   }
 
 }
