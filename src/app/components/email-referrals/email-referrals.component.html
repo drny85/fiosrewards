@@ -48,7 +48,7 @@
           <td>{{ referral.address.apt }}</td>
           <td>{{ referral.phone }}</td>
           <td>{{ referral.moveIn | date:"shortDate" }}</td>
-          <td class="bg-secondary">{{ referral.status | uppercase }}</td>
+          <td [ngClass]="{'bg-success': referral.status == 'closed', 'bg-dark': referral.status == 'in progress', 'bg-warning': referral.status == 'pending', 'bg-info': referral.status == 'new', 'bg-danger': referral.status == 'not sold'}">{{ referral.status | uppercase }}</td>
           <td><a class="btn btn-secondary btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
         </tr>
       </tbody>
