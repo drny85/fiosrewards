@@ -2,9 +2,7 @@
   <div class="col">
     <div class="figure">
       <h3 class="card-title text-center">In Progress</h3>
-      <p class="text-center">
         <round-progress [current]="inProgressReferralTotal" [max]="100" [radius]="100" [animationDelay]="1" [stroke]="30" [color]="'#420DAB'"></round-progress>
-      </p>
       <br>
       <figcaption class="figure-caption text-center">{{ inProgress / total | percent:'1.2-2' }}</figcaption>
   </div>
@@ -12,17 +10,14 @@
   <div class="col">
     <div class="figure">
       <h3 class="card-title text-center">Pending</h3>
-      <p class="text-center">
         <round-progress [current]="pendingReferralTotal" [max]="100" [radius]="100" [animationDelay]="1" [stroke]="30" [color]="'#FFA500'"></round-progress>
-      </p>
       <br>
       <figcaption class="figure-caption text-center">{{ pending / total | percent:'1.2-2' }}</figcaption>
     </div>
   </div>
 <div class="row">
   <div class="col">
-      <div class="figure">
-          
+      <div class="figure">   
           <h3 class="text-center">Closed</h3>
           <round-progress [current]="closedReferralTotal" [max]="100" [radius]="100" [animationDelay]="1" [stroke]="30" [color]="'#036d2a'"></round-progress>
           <br>

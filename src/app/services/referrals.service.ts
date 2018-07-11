@@ -45,39 +45,29 @@ export class ReferralsService {
       return this.referrals;
   }
 
+  // get all referrals by name
   getSenders() {
     this.sendersColl = this.afs.collection('senders', ref => ref.orderBy('name'));
     this.senders = this.sendersColl.valueChanges();
     return this.senders;
 
   }
-
-  addSender(sender: Sender, user: string) {
-   this.getSenders().subscribe(ref => this.current = ref.filter(r =>  r.name === user.toLowerCase()));
-   if (this.current.length > 1 ) {
-     this.sendersColl.add(sender);
-     console.log(this.current);
-   } else {
-     console.log('Something is not right');
-     console.log(this.current);
-   }
-  }
-
+// add a new referral
   addReferral(referral: Referral) {
 
     this.referralCollection.add(referral);
   }
-
+// delete a referral
   deleteReferral(id: string) {
     this.referralDoc = this.afs.doc(`customer/${id}`);
     this.referralDoc.delete();
   }
-
+// update a referral
   updateItem(referral: Referral) {
     this.referralDoc = this.afs.doc(`customer/${referral.id}`);
     this.referralDoc.update(referral);
   }
-
+// get just a particular referral
   getReferral(id: string): Observable<Referral> {
     this.referralDoc = this.afs.doc<Referral>(`customer/${id}`);
     this.referral = this.referralDoc.snapshotChanges().pipe(map(action => {
