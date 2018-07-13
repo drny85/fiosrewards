@@ -16,6 +16,7 @@ import { AllReferralsComponent } from './components/allreferrals/allreferrals.co
 import { NotsoldComponent } from './components/notsold/notsold.component';
 import { NewComponent } from './components/new/new.component';
 import { InprogressComponent } from './components/inprogress/inprogress.component';
+import { ReferralByComponent } from './components/referral-by/referral-by.component';
 
 
 
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'all', component: AllComponent, canActivate: [AuthGuard] },
   { path: 'inprogress', component: InprogressComponent, canActivate: [AuthGuard] },
+  { path: 'referral-by', component: ReferralByComponent, canActivate: [AuthGuard] },
 
   { path: '**', component: PagenotfoundComponent }
 ];

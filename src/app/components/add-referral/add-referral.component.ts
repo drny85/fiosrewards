@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ReferralsService } from './../../services/referrals.service';
 import { Referral } from './../../models/referral';
 import { Component, OnInit } from '@angular/core';
-
+import { TextMaskModule } from 'angular2-text-mask';
 
 @Component({
   selector: 'app-add-referral',
@@ -12,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-referral.component.css']
 })
 export class AddReferralComponent implements OnInit {
-
 
   customer: Referral = {
 

@@ -1,0 +1,55 @@
+<h3 class="text-center mb-5">Filter Referral By Leasing Agent.</h3>
+<div class="row">
+  <div class="col-md-2 col-lg-2 col-xl-2">
+    <div class="btn-group-vertical">
+    <button class="btn btn-secondary" *ngFor="let sender of senders" (click)="filterBy($event)">{{ sender.name }} </button>
+
+    </div>
+  </div>
+<div *ngIf="show; else noItems" class="animated fadeIn col">
+
+    <div class="mb-5">
+        <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
+      </div>
+      <br>
+      <br>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Apt</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Move In</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody class="table-striped">
+          <tr *ngFor="let referral of referralList">
+            <td>{{ referral.name }} {{ referral.lastName }}</td>
+            <td>{{ referral.address.street }}</td>
+            <td>{{ referral.address.apt }}</td>
+            <td>{{ referral.phone }}</td>
+            <td>{{ referral.moveIn | date:"shortDate" }}</td>
+            <td class="bg-danger">{{ referral.status | uppercase }}</td>
+            <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          
+          
+        </tfoot>
+      </table>
+</div>
+</div>
+
+<ng-template #noItems>
+    <div class="card">
+      <div class="card-body">
+        <p class="alert alert-info">There no referrals in this category.</p>
+      </div>
+  
+    </div>
+  </ng-template>

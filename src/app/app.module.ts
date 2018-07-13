@@ -32,6 +32,7 @@ import { AllComponent } from './components/all/all.component';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { EmailReferralsComponent } from './components/email-referrals/email-referrals.component';
+import { ReferralByComponent } from './components/referral-by/referral-by.component';
 
 
 
@@ -55,7 +56,8 @@ import { EmailReferralsComponent } from './components/email-referrals/email-refe
     LoginComponent,
     AllComponent,
     StatisticsComponent,
-    EmailReferralsComponent
+    EmailReferralsComponent,
+    ReferralByComponent
 
   ],
   imports: [
@@ -68,6 +70,7 @@ import { EmailReferralsComponent } from './components/email-referrals/email-refe
     ToastrModule.forRoot(), // ToastrModule added
     AngularFireAuthModule,
     RoundProgressModule
+
   ],
   providers: [ ReferralsService, AuthService],
   bootstrap: [AppComponent]
