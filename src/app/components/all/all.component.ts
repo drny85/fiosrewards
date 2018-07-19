@@ -28,7 +28,7 @@ export class AllComponent implements OnInit {
 
    ngOnInit() {
 
-    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals);
+    this.serRef.getReferrals().subscribe(referrals => this.referralList = referrals.filter(r => r.referredBy !== '0ther'));
     this.serRef.getSenders().subscribe(ref => this.senders = ref);
   }
 

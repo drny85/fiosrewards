@@ -1,16 +1,15 @@
 <h3 class="text-center mb-5">Filter Referral By Leasing Agent.</h3>
+<div class="mb-5">
+  <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
+</div>
 <div class="row">
   <div class="col-md-2 col-lg-2 col-xl-2">
     <div class="btn-group-vertical">
-    <button class="btn btn-secondary" *ngFor="let sender of senders" (click)="filterBy($event)">{{ sender.name }} </button>
+    <button class="btn bg-dark text-white" *ngFor="let sender of senders" (click)="filterBy($event)">{{ sender.name }} </button>
 
     </div>
   </div>
-<div *ngIf="show; else noItems" class="animated fadeIn col">
-
-    <div class="mb-5">
-        <button class="btn btn-primary pull-right" routerLink="/add-referral">Add New Referral</button>
-      </div>
+<div *ngIf="show; else noItems" class="animated fadeIn col-md-10 col-lg-10 col-xl-10">
       <br>
       <br>
     <table class="table">
@@ -33,7 +32,7 @@
             <td>{{ referral.address.apt }}</td>
             <td>{{ referral.phone }}</td>
             <td>{{ referral.moveIn | date:"shortDate" }}</td>
-            <td class="bg-danger">{{ referral.status | uppercase }}</td>
+            <td [ngClass]="{'bg-success': referral.status == 'closed', 'bg-warning': referral.status == 'pending', 'bg-info': referral.status == 'new', 'bg-danger': referral.status == 'not sold',  'bg-secondary': referral.status == 'in progress'}" class="bg-danger">{{ referral.status | uppercase }}</td>
             <td><a class="btn btn-success btn-block" routerLink="/all/details/{{ referral.id }}">Details</a></td>
           </tr>
         </tbody>
@@ -44,9 +43,10 @@
       </table>
 </div>
 </div>
+<div class="clearfix"></div>
 
 <ng-template #noItems>
-    <div class="card">
+    <div class="card col-md-10 col-lg-10 col-xl-10">
       <div class="card-body">
         <p class="alert alert-info">There no referrals in this category.</p>
       </div>
