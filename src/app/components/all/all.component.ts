@@ -56,7 +56,7 @@ export class AllComponent implements OnInit {
     this.search = e.target.value;
     if ( this.search.length > 0 ) {
       this.serRef.getReferrals().subscribe(ref => {
-        this.referralList = ref.filter(status => status.name.toLowerCase().includes(this.search.toLowerCase()));
+        this.referralList = ref.filter(status => status.name.toLowerCase().includes(this.search.toLowerCase()) || status.address.apt.includes(this.search.toLowerCase()));
 
       });
     } else {
